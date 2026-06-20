@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --color-gold: #c9a84c;
+  --color-gold-light: #e5c46a;
+  --color-surface: #050505;
+  --color-card: #0d0d0d;
+  --color-border: #1e1e1e;
+  --color-cream: #f2efe8;
+  --color-muted: #6a6a6a;
+  --color-rec: #ff3030;
+}
+html {
+  scroll-behavior: smooth;
+}
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  background-color: #000000;
+  color: #f2efe8;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(201, 168, 76, 0.2);
+  color: #f2efe8;
+}
+
+/* Font utility */
+.font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* ── Reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* ── Letterbox slide in ── */
+@keyframes lb-slide-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes lb-slide-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.lb-top {
+  animation: lb-slide-top 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.lb-bottom {
+  animation: lb-slide-bottom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Hero content fade in ── */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-enter {
+  animation: hero-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+}
+
+/* ── REC dot pulse ── */
+@keyframes rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.rec-dot {
+  animation: rec-pulse 1.2s ease-in-out infinite;
+}
+
+/* ── Scroll indicator ── */
+@keyframes scroll-drop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+.scroll-line {
+  animation: scroll-drop 2s ease-in-out infinite;
+}
+
+/* ── Film grain ── */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Popular card glow ── */
+.popular-glow {
+  box-shadow: 0 0 50px rgba(201, 168, 76, 0.12);
+}
