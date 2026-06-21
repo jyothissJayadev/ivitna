@@ -49,7 +49,7 @@ const contact = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-[#1A1A1A]">
+    <footer className="bg-black border-t border-white/[0.04]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-8">
 
         {/* Top */}
@@ -57,13 +57,36 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 border border-[#C9A84C] flex items-center justify-center shrink-0">
-                <span className="text-[#C9A84C] font-bold text-[11px] tracking-widest">IV</span>
-              </div>
-              <span className="text-[#F2EFE8] text-[11px] font-medium tracking-[0.3em] uppercase">ivitna</span>
+            <div className="flex items-center text-[#F2EFE8] mb-5">
+              <svg viewBox="0 0 120 48" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* i (first) */}
+                <rect x="12" y="14" width="4.5" height="18" rx="1" fill="currentColor" />
+                <circle cx="14.25" cy="7" r="2.5" fill="currentColor" />
+
+                {/* v */}
+                <path d="M22 14.5 L28.5 31 L35 14.5" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+
+                {/* i (second) */}
+                <rect x="41" y="14" width="4.5" height="18" rx="1" fill="currentColor" />
+                <circle cx="43.25" cy="7" r="2.5" fill="currentColor" />
+
+                {/* t */}
+                <polygon points="53.5,32 58,32 58,6 53.5,11.5" fill="currentColor" />
+                <path d="M49.5 17.5 H61.5" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+                {/* Downward triangle (brand purple) */}
+                <polygon points="49.5,38 62.5,38 56,46.5" fill="#5B244D" />
+
+                {/* n */}
+                <path d="M70.5 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+                <path d="M70.5 20 C70.5 14, 80 14, 80 19 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+
+                {/* a */}
+                <circle cx="101" cy="23.75" r="6.75" stroke="currentColor" strokeWidth="4.5" fill="none" />
+                <path d="M107.75 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+                <circle cx="107.75" cy="7" r="2.5" fill="#5B244D" />
+              </svg>
             </div>
-            <p className="text-[#333] text-xs leading-relaxed max-w-[180px]">
+            <p className="text-white/40 text-xs leading-relaxed max-w-[180px]">
               Instagram Video Production Studio. Making brands impossible to scroll past since 2021.
             </p>
           </div>
@@ -71,13 +94,13 @@ export default function Footer() {
           {/* Nav groups */}
           {Object.entries(nav).map(([group, items]) => (
             <div key={group}>
-              <p className="text-[#F2EFE8] text-[9px] tracking-[0.35em] uppercase mb-5">{group}</p>
+              <p className="text-[#F2EFE8]/90 text-[9px] tracking-[0.35em] uppercase mb-5">{group}</p>
               <ul className="flex flex-col gap-3">
                 {items.map(item => (
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-[#333] hover:text-[#6A6A6A] text-xs transition-colors duration-200"
+                      className="text-white/40 hover:text-[#C9A84C] text-xs transition-colors duration-300"
                     >
                       {item}
                     </a>
@@ -89,7 +112,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-[#F2EFE8] text-[9px] tracking-[0.35em] uppercase mb-5">Contact</p>
+            <p className="text-[#F2EFE8]/90 text-[9px] tracking-[0.35em] uppercase mb-5">Contact</p>
             <ul className="flex flex-col gap-3">
               {contact.map((c) => (
                 <li key={c.label}>
@@ -97,7 +120,7 @@ export default function Footer() {
                     href={c.href}
                     target={c.href.startsWith('http') ? '_blank' : undefined}
                     rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-2.5 text-[#333] hover:text-[#C9A84C] text-xs transition-colors duration-200"
+                    className="flex items-center gap-2.5 text-white/40 hover:text-[#C9A84C] text-xs transition-all duration-300"
                   >
                     <span className="text-[#C9A84C] shrink-0">{c.icon}</span>
                     {c.label}
@@ -109,13 +132,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[#1A1A1A] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[#2A2A2A] text-[10px] tracking-wide">
+        <div className="border-t border-white/[0.04] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/20 text-[10px] tracking-wide">
             © {new Date().getFullYear()} ivitna. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {['Privacy Policy', 'Terms of Service'].map(l => (
-              <a key={l} href="#" className="text-[#2A2A2A] hover:text-[#5A5A5A] text-[10px] transition-colors">
+              <a key={l} href="#" className="text-white/20 hover:text-white/40 text-[10px] transition-colors duration-300">
                 {l}
               </a>
             ))}

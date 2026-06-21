@@ -30,13 +30,34 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[72px] lg:h-[82px]">
 
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 border border-[#C9A84C] flex items-center justify-center shrink-0 group-hover:bg-[#C9A84C] transition-colors duration-300">
-              <span className="text-[#C9A84C] group-hover:text-black font-bold text-[11px] tracking-widest transition-colors duration-300">IV</span>
-            </div>
-            <span className="text-[#F2EFE8] text-[11px] font-medium tracking-[0.3em] uppercase hidden sm:block">
-              ivitna
-            </span>
+          <a href="#" className="flex items-center text-[#F2EFE8] hover:text-[#C9A84C] transition-colors duration-300">
+            <svg viewBox="0 0 120 48" className="h-9 w-auto transition-colors duration-300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* i (first) */}
+              <rect x="12" y="14" width="4.5" height="18" rx="1" fill="currentColor" />
+              <circle cx="14.25" cy="7" r="2.5" fill="currentColor" />
+
+              {/* v */}
+              <path d="M22 14.5 L28.5 31 L35 14.5" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+
+              {/* i (second) */}
+              <rect x="41" y="14" width="4.5" height="18" rx="1" fill="currentColor" />
+              <circle cx="43.25" cy="7" r="2.5" fill="currentColor" />
+
+              {/* t */}
+              <polygon points="53.5,32 58,32 58,6 53.5,11.5" fill="currentColor" />
+              <path d="M49.5 17.5 H61.5" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+              {/* Downward triangle (brand purple) */}
+              <polygon points="49.5,38 62.5,38 56,46.5" fill="#5B244D" />
+
+              {/* n */}
+              <path d="M70.5 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+              <path d="M70.5 20 C70.5 14, 80 14, 80 19 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+
+              {/* a */}
+              <circle cx="101" cy="23.75" r="6.75" stroke="currentColor" strokeWidth="4.5" fill="none" />
+              <path d="M107.75 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+              <circle cx="107.75" cy="7" r="2.5" fill="#5B244D" />
+            </svg>
           </a>
 
           {/* Desktop nav */}
