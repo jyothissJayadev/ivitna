@@ -23,60 +23,74 @@ const SmoothScrollHeroBackground = ({
   const videoScale = useTransform(progress, [0, 1], [1.25, 1.0]);
   const videoRef = React.useRef(null);
 
-  // Ping-pong reverse: seeked-chain with fastSeek() for keyframe-aligned seeks.
-  // fastSeek() snaps to the nearest keyframe instead of decoding every
-  // intermediate frame — far faster than exact currentTime seeks.
-  // STEP = 1/8 s → 8 seeks per real second, keeps reverse feeling brisk.
+  // Control video frame playback directly from the scroll progress (forward & reverse scrubbing)
   React.useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    let reversing = false;
-    const STEP = 1 / 8;
+    let targetTime = 0;
+    let animationFrameId = null;
 
-    const seek = (t) => {
-      if (video.fastSeek) {
-        video.fastSeek(t);      // keyframe-aligned — fast
-      } else {
-        video.currentTime = t;  // fallback
+    const updateVideoTime = (latestProgress) => {
+      if (video.duration && !isNaN(video.duration)) {
+        // Map progress (0 -> 1) directly to video duration (0 -> duration)
+        targetTime = latestProgress * video.duration;
       }
     };
 
-    const seekBack = () => {
-      if (!reversing) return;
-      const next = video.currentTime - STEP;
-      if (next <= 0) {
-        reversing = false;
-        seek(0);
-        video.play();
-      } else {
-        seek(next);
+    // Smoothly interpolate currentTime towards targetTime
+    const renderLoop = () => {
+      if (video.duration && !isNaN(video.duration)) {
+        const current = video.currentTime;
+        const diff = targetTime - current;
+
+        // If the gap is substantial and the video is not already seeking, seek smoothly.
+        // Checking !video.seeking prevents choke-points on the video decoder.
+        if (!video.seeking && Math.abs(diff) > 0.01) {
+          // Easing constant (0.12 means 12% towards target per frame)
+          video.currentTime = current + diff * 0.12;
+        }
+      }
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    // Listen to metadata and data load events to set the initial frame
+    const handleMetadata = () => {
+      if (video.duration) {
+        targetTime = progress.get() * video.duration;
+        video.currentTime = targetTime;
       }
     };
 
-    const onSeeked = () => {
-      if (reversing) seekBack();
-    };
+    video.addEventListener("loadedmetadata", handleMetadata);
+    video.addEventListener("loadeddata", handleMetadata);
+    video.addEventListener("canplay", handleMetadata);
 
-    const onEnded = () => {
-      reversing = true;
-      video.pause();
-      seekBack();
-    };
+    // If metadata is already loaded, set initial frame now
+    if (video.readyState >= 1) {
+      handleMetadata();
+    }
 
-    video.addEventListener("ended",  onEnded);
-    video.addEventListener("seeked", onSeeked);
+    // Start the animation loop
+    animationFrameId = requestAnimationFrame(renderLoop);
+
+    // Subscribe to progress changes (always, do not return early!)
+    const unsubscribe = progress.on("change", (latest) => {
+      updateVideoTime(latest);
+    });
 
     return () => {
-      video.removeEventListener("ended",  onEnded);
-      video.removeEventListener("seeked", onSeeked);
-      reversing = false;
+      cancelAnimationFrame(animationFrameId);
+      video.removeEventListener("loadedmetadata", handleMetadata);
+      video.removeEventListener("loadeddata", handleMetadata);
+      video.removeEventListener("canplay", handleMetadata);
+      unsubscribe();
     };
-  }, []);
+  }, [progress]);
 
   return (
     <motion.div
-      className="absolute inset-0 bg-black"
+      className="absolute inset-0 bg-surface"
       style={{ clipPath }}
     >
       {/* Mobile fallback image */}
@@ -101,7 +115,6 @@ const SmoothScrollHeroBackground = ({
         style={{ objectPosition: "68% center", scale: videoScale }}
         muted
         playsInline
-        autoPlay
       />
 
       {/* Overlays that clip with the video (gradients, grain, etc.) */}

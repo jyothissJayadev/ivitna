@@ -26,7 +26,7 @@ function CountUp({ to, suffix, run }) {
   }, [run, to]);
 
   return (
-    <span className="font-display font-light text-[#F2EFE8]"
+    <span className="font-display font-light text-brand-purple"
           style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5rem)', lineHeight: 1 }}>
       {val}{suffix}
     </span>
@@ -49,18 +49,18 @@ function StatItem({ stat }) {
   }, []);
 
   return (
-    <div ref={ref} className="flex flex-col items-center text-center py-12 px-6 bg-black">
+    <div ref={ref} className="flex flex-col items-center text-center py-12 px-6 bg-surface">
       <CountUp to={stat.value} suffix={stat.suffix} run={run} />
-      <p className="text-[#F2EFE8] text-[10px] tracking-[0.3em] uppercase mt-3 mb-1">{stat.label}</p>
-      <p className="text-[#3A3A3A] text-xs">{stat.sub}</p>
+      <p className="text-text-dark text-[10px] tracking-[0.3em] uppercase mt-3 mb-1">{stat.label}</p>
+      <p className="text-text-dark/60 text-xs">{stat.sub}</p>
     </div>
   );
 }
 
 export default function Stats() {
   return (
-    <section className="bg-black border-y border-[#1A1A1A]">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#1A1A1A]">
+    <section className="bg-surface border-y border-border">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border">
         {stats.map(s => <StatItem key={s.label} stat={s} />)}
       </div>
     </section>

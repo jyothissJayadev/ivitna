@@ -58,10 +58,10 @@ function ProjectCard({ p }) {
       {/* Visual */}
       <div className="aspect-video relative" style={{ background: p.gradient }}>
         {/* Corner brackets — film aesthetic */}
-        <div className="absolute top-4 left-4 w-5 h-5 border-t border-l border-[#2A2A2A] group-hover:border-[#C9A84C]/40 transition-colors duration-500" />
-        <div className="absolute top-4 right-4 w-5 h-5 border-t border-r border-[#2A2A2A] group-hover:border-[#C9A84C]/40 transition-colors duration-500" />
-        <div className="absolute bottom-4 left-4 w-5 h-5 border-b border-l border-[#2A2A2A] group-hover:border-[#C9A84C]/40 transition-colors duration-500" />
-        <div className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-[#2A2A2A] group-hover:border-[#C9A84C]/40 transition-colors duration-500" />
+        <div className="absolute top-4 left-4 w-5 h-5 border-t border-l border-border group-hover:border-brand-purple/40 transition-colors duration-500" />
+        <div className="absolute top-4 right-4 w-5 h-5 border-t border-r border-border group-hover:border-brand-purple/40 transition-colors duration-500" />
+        <div className="absolute bottom-4 left-4 w-5 h-5 border-b border-l border-border group-hover:border-brand-purple/40 transition-colors duration-500" />
+        <div className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-border group-hover:border-brand-purple/40 transition-colors duration-500" />
 
         {/* Play button */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -81,12 +81,12 @@ function ProjectCard({ p }) {
       </div>
 
       {/* Footer */}
-      <div className="bg-[#0A0A0A] border border-t-0 border-[#1A1A1A] group-hover:border-[#C9A84C]/20 transition-colors duration-500 px-5 py-4 flex items-center justify-between">
+      <div className="bg-card border border-t-0 border-border group-hover:border-brand-purple/20 transition-colors duration-500 px-5 py-4 flex items-center justify-between">
         <div>
-          <p className="text-[#C9A84C] text-[8px] tracking-[0.45em] uppercase mb-1">{p.cat}</p>
-          <p className="text-[#F2EFE8] text-sm font-medium">{p.title}</p>
+          <p className="text-brand-purple text-[8px] tracking-[0.45em] uppercase mb-1">{p.cat}</p>
+          <p className="text-text-dark text-sm font-medium">{p.title}</p>
         </div>
-        <span className="text-[#3A3A3A] text-[10px] font-mono">{p.views}</span>
+        <span className="text-text-dark/50 text-[10px] font-mono">{p.views}</span>
       </div>
     </div>
   );
@@ -95,20 +95,20 @@ function ProjectCard({ p }) {
 export default function Portfolio() {
   const headRef = useReveal();
   return (
-    <section id="work" className="bg-black py-28 lg:py-36">
+    <section id="work" className="bg-surface py-28 lg:py-36">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         {/* Header */}
         <div ref={headRef} className="reveal text-center mb-16">
-          <p className="text-[#C9A84C] text-[9px] tracking-[0.55em] uppercase mb-5">Our Work</p>
-          <h2 className="font-display font-light text-[#F2EFE8]" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
+          <p className="text-brand-purple text-[9px] tracking-[0.55em] uppercase mb-5">Our Work</p>
+          <h2 className="font-display font-light text-text-dark" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
             Results you can
             <br />
-            <em className="italic text-[#3A3A3A]">measure.</em>
+            <em className="italic text-brand-purple">measure.</em>
           </h2>
           <a
             href="#"
-            className="inline-block mt-6 text-[#C9A84C] text-[9px] tracking-[0.25em] uppercase border-b border-[#C9A84C]/25 pb-0.5 hover:border-[#C9A84C] transition-colors"
+            className="inline-block mt-6 text-brand-purple text-[9px] tracking-[0.25em] uppercase border-b border-brand-purple/25 pb-0.5 hover:border-brand-purple transition-colors"
           >
             All Projects →
           </a>

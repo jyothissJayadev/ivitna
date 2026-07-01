@@ -26,25 +26,25 @@ function Card({ t, delay }) {
   return (
     <div
       ref={ref}
-      className={`reveal reveal-delay-${delay} flex flex-col bg-[#080808] border border-[#1A1A1A] p-8 lg:p-10`}
+      className={`reveal reveal-delay-${delay} flex flex-col bg-card border border-border p-8 lg:p-10 shadow-xs`}
     >
       {/* Result badge */}
-      <div className="inline-flex w-fit items-center gap-2 border border-[#C9A84C]/20 bg-[#C9A84C]/5 px-3 py-1 mb-8">
-        <span className="w-1 h-1 rounded-full bg-[#C9A84C]" />
-        <span className="text-[#C9A84C] text-[8px] tracking-[0.4em] uppercase">{t.badge}</span>
+      <div className="inline-flex w-fit items-center gap-2 border border-brand-purple/20 bg-brand-purple/5 px-3 py-1 mb-8">
+        <span className="w-1 h-1 rounded-full bg-brand-purple" />
+        <span className="text-brand-purple text-[8px] tracking-[0.4em] uppercase">{t.badge}</span>
       </div>
 
       {/* Large quote mark */}
-      <span className="font-display text-[#1A1A1A] leading-none select-none mb-3"
+      <span className="font-display text-brand-purple/10 leading-none select-none mb-3"
             style={{ fontSize: '4.5rem' }}>"</span>
 
       {/* Quote */}
-      <p className="text-[#7A7A7A] text-sm leading-[1.9] flex-1 mb-8">{t.quote}</p>
+      <p className="text-text-dark/70 text-sm leading-[1.9] flex-1 mb-8">{t.quote}</p>
 
       {/* Author */}
-      <div className="border-t border-[#1A1A1A] pt-6">
-        <p className="text-[#F2EFE8] text-sm font-medium">{t.name}</p>
-        <p className="text-[#4A4A4A] text-xs mt-1">{t.title}</p>
+      <div className="border-t border-border pt-6">
+        <p className="text-text-dark text-sm font-medium">{t.name}</p>
+        <p className="text-text-dark/50 text-xs mt-1">{t.title}</p>
       </div>
     </div>
   );
@@ -53,15 +53,15 @@ function Card({ t, delay }) {
 export default function Testimonials() {
   const headRef = useReveal();
   return (
-    <section className="bg-[#050505] py-28 lg:py-36">
+    <section className="bg-surface py-28 lg:py-36">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         <div ref={headRef} className="reveal mb-16 text-center">
-          <p className="text-[#C9A84C] text-[9px] tracking-[0.55em] uppercase mb-5">Client Results</p>
-          <h2 className="font-display font-light text-[#F2EFE8]" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
+          <p className="text-brand-purple text-[9px] tracking-[0.55em] uppercase mb-5">Client Results</p>
+          <h2 className="font-display font-light text-text-dark" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
             Words from brands
             <br />
-            <em className="italic text-[#3A3A3A]">that grew.</em>
+            <em className="italic text-brand-purple">that grew.</em>
           </h2>
         </div>
 

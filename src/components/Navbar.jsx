@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-black/90 backdrop-blur-xl border-b border-[#1E1E1E]'
+          ? 'bg-surface/95 backdrop-blur-xl border-b border-border'
           : 'bg-transparent'
       }`}
     >
@@ -30,7 +30,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[72px] lg:h-[82px]">
 
           {/* Logo */}
-          <a href="#" className="flex items-center text-[#F2EFE8] hover:text-[#C9A84C] transition-colors duration-300">
+          <a
+            href="#"
+            className={`flex items-center transition-colors duration-300 ${
+              scrolled ? 'text-text-dark hover:text-brand-purple' : 'text-cream hover:text-gold'
+            }`}
+          >
             <svg viewBox="0 0 120 48" className="h-9 w-auto transition-colors duration-300" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* i (first) */}
               <rect x="12" y="14" width="4.5" height="18" rx="1" fill="currentColor" />
@@ -47,7 +52,7 @@ export default function Navbar() {
               <polygon points="53.5,32 58,32 58,6 53.5,11.5" fill="currentColor" />
               <path d="M49.5 17.5 H61.5" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
               {/* Downward triangle (brand purple) */}
-              <polygon points="49.5,38 62.5,38 56,46.5" fill="#5B244D" />
+              <polygon points="49.5,38 62.5,38 56,46.5" fill="#702a63" />
 
               {/* n */}
               <path d="M70.5 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
@@ -56,7 +61,7 @@ export default function Navbar() {
               {/* a */}
               <circle cx="101" cy="23.75" r="6.75" stroke="currentColor" strokeWidth="4.5" fill="none" />
               <path d="M107.75 14 V32" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
-              <circle cx="107.75" cy="7" r="2.5" fill="#5B244D" />
+              <circle cx="107.75" cy="7" r="2.5" fill="#702a63" />
             </svg>
           </a>
 
@@ -66,7 +71,11 @@ export default function Navbar() {
               <a
                 key={label}
                 href={href}
-                className="text-[#5A5A5A] hover:text-[#F2EFE8] text-[10px] tracking-[0.25em] uppercase transition-colors duration-200"
+                className={`text-[10px] tracking-[0.25em] uppercase transition-colors duration-200 ${
+                  scrolled
+                    ? 'text-text-dark/60 hover:text-brand-purple'
+                    : 'text-[#FAF6EE]/60 hover:text-[#FAF6EE]'
+                }`}
               >
                 {label}
               </a>
@@ -78,7 +87,7 @@ export default function Navbar() {
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-2 bg-[#C9A84C] text-black text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3 hover:bg-[#E5C46A] transition-colors duration-200"
+            className="hidden md:inline-flex items-center gap-2 bg-brand-purple text-white text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3 hover:bg-brand-purple-light transition-colors duration-200"
           >
             Book a Call
           </a>
@@ -89,25 +98,35 @@ export default function Navbar() {
             className="md:hidden flex flex-col gap-[5px] p-2"
             aria-label="Toggle menu"
           >
-            <span className={`block w-5 h-px bg-[#F2EFE8] transition-all duration-300 origin-center ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
-            <span className={`block h-px bg-[#F2EFE8] transition-all duration-300 ${open ? 'w-0 opacity-0' : 'w-5'}`} />
-            <span className={`block w-5 h-px bg-[#F2EFE8] transition-all duration-300 origin-center ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+            <span className={`block w-5 h-px transition-all duration-300 origin-center ${
+              scrolled ? 'bg-text-dark' : 'bg-cream'
+            } ${open ? 'rotate-45 translate-y-[6px]' : ''}`} />
+            <span className={`block h-px transition-all duration-300 ${
+              scrolled ? 'bg-text-dark' : 'bg-cream'
+            } ${open ? 'w-0 opacity-0' : 'w-5'}`} />
+            <span className={`block w-5 h-px transition-all duration-300 origin-center ${
+              scrolled ? 'bg-text-dark' : 'bg-cream'
+            } ${open ? '-rotate-45 -translate-y-[6px]' : ''}`} />
           </button>
         </div>
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden border-t border-[#1E1E1E] transition-all duration-300 overflow-hidden ${
-            open ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'
-          }`}
+          className={`md:hidden transition-all duration-300 overflow-hidden ${
+            scrolled ? 'border-t border-border bg-surface' : 'border-t border-white/10 bg-black/95'
+          } ${open ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'}`}
         >
-          <div className="py-5 flex flex-col gap-1">
+          <div className="py-5 flex flex-col gap-1 px-2">
             {links.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="block py-3 text-[#5A5A5A] hover:text-[#F2EFE8] text-[10px] tracking-[0.25em] uppercase transition-colors"
+                className={`block py-3 text-[10px] tracking-[0.25em] uppercase transition-colors ${
+                  scrolled
+                    ? 'text-text-dark/60 hover:text-brand-purple'
+                    : 'text-white/60 hover:text-white'
+                }`}
               >
                 {label}
               </a>
@@ -117,7 +136,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex mt-4 w-fit bg-[#C9A84C] text-black text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3"
+              className="inline-flex mt-4 w-fit bg-brand-purple text-white text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3 hover:bg-brand-purple-light transition-colors duration-200"
             >
               Book a Call
             </a>

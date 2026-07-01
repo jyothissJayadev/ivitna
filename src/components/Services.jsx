@@ -58,19 +58,19 @@ function ServiceCard({ s, delay }) {
   return (
     <div
       ref={ref}
-      className={`reveal reveal-delay-${delay} group border border-transparent p-8 lg:p-10 hover:border-[#C9A84C]/50 transition-all duration-500 cursor-default bg-[#050505]`}
+      className={`reveal reveal-delay-${delay} group border border-border/80 p-8 lg:p-10 hover:border-brand-purple/50 transition-all duration-500 cursor-default bg-card shadow-xs`}
     >
       <div className="flex items-start justify-between mb-8">
-        <div className="text-[#C9A84C]">
+        <div className="text-brand-purple">
           <s.Icon />
         </div>
-        <span className="text-[#1E1E1E] font-mono text-xs tracking-widest">{s.num}</span>
+        <span className="text-brand-purple/25 font-mono text-xs tracking-widest">{s.num}</span>
       </div>
-      <h3 className="font-display text-[#F2EFE8] font-light mb-4" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
+      <h3 className="font-display text-text-dark font-light mb-4" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)' }}>
         {s.title}
       </h3>
-      <p className="text-[#5A5A5A] text-sm leading-[1.8]">{s.desc}</p>
-      <div className="mt-8 h-px bg-[#C9A84C] w-6 group-hover:w-14 transition-all duration-500" />
+      <p className="text-text-dark/70 text-sm leading-[1.8]">{s.desc}</p>
+      <div className="mt-8 h-px bg-brand-purple w-6 group-hover:w-14 transition-all duration-500" />
     </div>
   );
 }
@@ -78,21 +78,21 @@ function ServiceCard({ s, delay }) {
 export default function Services() {
   const headRef = useReveal();
   return (
-    <section id="services" className="bg-[#050505] py-28 lg:py-36">
+    <section id="services" className="bg-surface py-28 lg:py-36">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         {/* Header */}
         <div ref={headRef} className="reveal mb-16 text-center">
-          <p className="text-[#C9A84C] text-[9px] tracking-[0.55em] uppercase mb-5">What We Create</p>
-          <h2 className="font-display font-light text-[#F2EFE8]" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
+          <p className="text-brand-purple text-[9px] tracking-[0.55em] uppercase mb-5">What We Create</p>
+          <h2 className="font-display font-light text-text-dark" style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}>
             Every format.
             <br />
-            <em className="italic text-[#3A3A3A]">Every platform.</em>
+            <em className="italic text-brand-purple">Every platform.</em>
           </h2>
         </div>
 
         {/* Grid — hairline dividers via bg-color gap trick */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1A1A1A]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
           {services.map((s, i) => (
             <ServiceCard key={s.num} s={s} delay={(i % 2) + 1} />
           ))}

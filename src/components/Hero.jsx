@@ -13,7 +13,6 @@ const FINAL_CLIP   = 78;   // far-edge % when progress = 0  (= 100 - INITIAL_CLI
 const WHEEL_DIVISOR = 900; // virtual px of wheel input required to reach progress = 1
 
 export default function Hero() {
-  // progress is a MotionValue 0 → 1 that drives the entire clip-path reveal
   const progress = useMotionValue(0);
   const [locked, setLocked] = useState(true);
 
@@ -80,6 +79,18 @@ export default function Hero() {
     };
   }, [locked, progress]);
 
+  // Re-engage scroll lock and reset progress to 1 when user scrolls back to the top of the page
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0 && !locked) {
+        setLocked(true);
+        progress.set(1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [locked, progress]);
+
   // ── Gold frame — tracks the clip-path boundary ────────────────────────────
   const frameEdgeNum = useTransform(progress, [0, 1], [INITIAL_CLIP, 0]);
   const frameTop    = useMotionTemplate`${frameEdgeNum}%`;
@@ -92,12 +103,12 @@ export default function Hero() {
   // ── Overlays that clip WITH the video ─────────────────────────────────────
   const overlay = (
     <>
-      {/* Left gradient — darkens text side */}
+      {/* Left gradient — darkens text side with a rich purple wash */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(102deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.82) 36%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.04) 100%)",
+            "linear-gradient(102deg, rgba(91,36,77,0.92) 0%, rgba(91,36,77,0.78) 36%, rgba(91,36,77,0.25) 60%, rgba(91,36,77,0.05) 100%)",
         }}
       />
       {/* Top/bottom vignette */}
@@ -105,7 +116,7 @@ export default function Hero() {
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 18%, transparent 74%, rgba(0,0,0,0.65) 100%)",
+            "linear-gradient(to bottom, rgba(91,36,77,0.55) 0%, transparent 18%, transparent 74%, rgba(91,36,77,0.65) 100%)",
         }}
       />
       {/* Warm glow left */}
@@ -127,7 +138,7 @@ export default function Hero() {
      */
     <section
       id="hero"
-      className="relative h-screen bg-black overflow-hidden"
+      className="relative h-screen bg-surface overflow-hidden"
     >
       <SmoothScrollHero
         progress={progress}
@@ -164,10 +175,6 @@ export default function Hero() {
           {/* Letterbox top + REC indicator */}
           <div
             className="lb-top absolute top-0 inset-x-0 h-[10vh] z-20"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%)",
-            }}
           >
             <div className="hero-enter absolute bottom-3 left-6 lg:left-12 right-6 lg:right-12 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -178,7 +185,7 @@ export default function Hero() {
               </div>
               <span
                 className="text-[9px] font-mono tracking-wider"
-                style={{ color: "rgba(255,255,255,0.25)" }}
+                style={{ color: "rgba(18,18,18,0.3)" }}
               >
                 00:00:00:00
               </span>
@@ -194,7 +201,7 @@ export default function Hero() {
                 </p>
 
                 <h1
-                  className="font-display font-light text-[#F2EFE8] leading-[0.87]"
+                  className="font-display font-light text-text-dark leading-[0.87]"
                   style={{ fontSize: "clamp(2.8rem, 8vw, 7.5rem)" }}
                 >
                   We Make Videos
@@ -211,7 +218,7 @@ export default function Hero() {
 
                 <p
                   className="text-base max-w-[330px] mt-8 mb-11 leading-relaxed"
-                  style={{ color: "rgba(255,255,255,0.42)" }}
+                  style={{ color: "rgba(18,18,18,0.65)" }}
                 >
                   Premium Reels, Brand Films &amp; Social Content for brands
                   that refuse to be ignored.
@@ -221,7 +228,7 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-4 pointer-events-auto">
                   <a
                     href="#work"
-                    className="inline-flex items-center gap-3 bg-[#C9A84C] text-black text-[10px] font-bold tracking-[0.25em] uppercase px-9 py-4 hover:bg-[#E5C46A] active:scale-95 transition-all duration-200"
+                    className="inline-flex items-center gap-3 bg-brand-purple text-white text-[10px] font-bold tracking-[0.25em] uppercase px-9 py-4 hover:bg-brand-purple-light active:scale-95 transition-all duration-200"
                   >
                     View Our Work
                     <svg
@@ -245,17 +252,17 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-[10px] font-medium tracking-[0.25em] uppercase px-9 py-4 border transition-all duration-300"
                     style={{
-                      borderColor: "rgba(255,255,255,0.14)",
-                      color: "rgba(255,255,255,0.52)",
+                      borderColor: "rgba(18,18,18,0.15)",
+                      color: "rgba(18,18,18,0.6)",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "#C9A84C";
-                      e.currentTarget.style.color = "#C9A84C";
+                      e.currentTarget.style.borderColor = "#702a63";
+                      e.currentTarget.style.color = "#702a63";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor =
-                        "rgba(255,255,255,0.14)";
-                      e.currentTarget.style.color = "rgba(255,255,255,0.52)";
+                        "rgba(18,18,18,0.15)";
+                      e.currentTarget.style.color = "rgba(18,18,18,0.6)";
                     }}
                   >
                     Book a Call
@@ -268,36 +275,32 @@ export default function Hero() {
           {/* Letterbox bottom + scroll indicator */}
           <div
             className="lb-bottom absolute bottom-0 inset-x-0 h-[10vh] z-20"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%)",
-            }}
           >
             <div className="hero-enter absolute top-3 left-6 lg:left-12 right-6 lg:right-12 flex items-center justify-center relative">
               <div className="flex flex-col items-center gap-2">
                 <div
                   className="w-px h-7 overflow-hidden relative"
-                  style={{ background: "rgba(255,255,255,0.07)" }}
+                  style={{ background: "rgba(18,18,18,0.08)" }}
                 >
                   <div className="scroll-line absolute inset-x-0 top-0 h-4 bg-[#C9A84C]" />
                 </div>
                 <span
                   className="text-[8px] tracking-[0.35em] uppercase"
-                  style={{ color: "rgba(255,255,255,0.2)" }}
+                  style={{ color: "rgba(18,18,18,0.3)" }}
                 >
                   Scroll
                 </span>
               </div>
               <span
                 className="absolute right-0 text-[9px] font-mono"
-                style={{ color: "rgba(255,255,255,0.18)" }}
+                style={{ color: "rgba(18,18,18,0.25)" }}
               >
                 16 : 9
               </span>
             </div>
           </div>
         </div>
-      </SmoothScrollHero>
+        </SmoothScrollHero>
     </section>
   );
 }

@@ -5,12 +5,16 @@
   --font-body: "DM Sans", system-ui, sans-serif;
   --color-gold: #c9a84c;
   --color-gold-light: #e5c46a;
-  --color-surface: #050505;
-  --color-card: #0d0d0d;
-  --color-border: #1e1e1e;
-  --color-cream: #f2efe8;
-  --color-muted: #6a6a6a;
+  --color-surface: #FAF6EE;
+  --color-card: #ffffff;
+  --color-border: #e6dfd3;
+  --color-cream: #FAF6EE;
+  --color-muted: #7a7a7a;
   --color-rec: #ff3030;
+  --color-brand-purple: #702a63;
+  --color-brand-purple-light: #8c3a7c;
+  --color-brand-purple-dark: #5B244D;
+  --color-text-dark: #121212;
 }
 html {
   scroll-behavior: smooth;
@@ -21,8 +25,8 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: #f2efe8;
+  background-color: var(--color-surface);
+  color: var(--color-text-dark);
   font-family: "DM Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -34,17 +38,17 @@ body {
   width: 3px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--color-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: #c9a84c;
+  background: var(--color-brand-purple);
   border-radius: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(201, 168, 76, 0.2);
-  color: #f2efe8;
+  background: rgba(112, 42, 99, 0.2);
+  color: var(--color-text-dark);
 }
 
 /* Font utility */
